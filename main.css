@@ -1,0 +1,112 @@
+$enable-grid-classes: false;
+$enable-cssgrid: true;
+@import 'bootstrap';
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.userWordOnScreen {
+  margin-top: 20px;
+}
+
+.userInput,
+.hint {
+  margin-top: 20px;
+}
+
+.letterAlmost,
+.letterGuessed,
+.letterNo {
+  padding: 0.3em;
+}
+
+.letterGuessed {
+  background-color: #76ce29;
+}
+
+.letterAlmost {
+  background-color: yellow;
+}
+
+.letterNo {
+  background-color: #c3c3c3;
+}
+
+#userWordGuess {
+  text-transform: lowercase;
+}
+
+.hints {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.triesCount {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: flex-start;
+  font-size: 1.5em;
+}
+
+.alphabet {
+  cursor: pointer;
+}
+
+@media (min-width: 350px) {
+  .lit {
+    font-size: 1.3em !important;
+  }
+}
+
+.lit {
+  margin: 2px;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  border: solid;
+  border-width: 0.5px;
+  font-size: 1.7em;
+}
+
+.lit:hover {
+  background-color: lightblue !important;
+}
+
+.row1 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+}
+
+.row2 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+}
+
+.row3 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+}
+
+.terms {
+  display: none;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 12px 20px 12px 20px;
+}
