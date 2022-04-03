@@ -183,58 +183,64 @@ keyboard.addEventListener('click', function (e) {
     let startCell = b - 5
     let activeCells = []
     let guess = userWord.join('')
-    for (let c = 0; c < color.length; c++) {
-      span[c].classList.remove(`cell-span${color[c]}`)
-    }
 
-    if (guess === secretWord) {
-      heading.innerHTML = `Победа! ${randomEmoji(emojisWin)}`
-      againButton.classList.remove('hidden')
-      keyboard.classList.toggle('hidden')
-    }
+    if (fiveLetterWords.includes(userWord.join(''))) {
+      for (let c = 0; c < color.length; c++) {
+        span[c].classList.remove(`cell-span${color[c]}`)
+      }
 
-    triesCount++
-    if (triesCount === 5) {
-      heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
-      againButton.classList.remove('hidden')
-      keyboard.classList.toggle('hidden')
-    }
+      if (guess === secretWord) {
+        heading.innerHTML = `Победа! ${randomEmoji(emojisWin)}`
+        againButton.classList.remove('hidden')
+        keyboard.classList.toggle('hidden')
+      }
 
-    for (let j = 0; j < 5; j++) {
-      activeCells.push(startCell + j)
-    }
+      triesCount++
+      if (triesCount === 5) {
+        heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
+        againButton.classList.remove('hidden')
+        keyboard.classList.toggle('hidden')
+      }
 
-    for (let j = 0; j < 5; j++) {
-      if (secretWord2.includes(userWord[j]) && secretWord2[j] != userWord[j]) {
-        document
-          .querySelector(`.cell${activeCells[j]}`)
-          .classList.add('cell-almost')
-        for (let c = 0; c < key.length; c++) {
-          key[c].textContent == userWord[j]
-            ? key[c].classList.add('key-almost')
-            : null
-        }
-      } else if (secretWord2[j] == userWord[j]) {
-        document
-          .querySelector(`.cell${activeCells[j]}`)
-          .classList.add('cell-guessed')
-        for (let c = 0; c < key.length; c++) {
-          key[c].textContent == userWord[j]
-            ? key[c].classList.add('key-guessed')
-            : null
-        }
-      } else {
-        document
-          .querySelector(`.cell${activeCells[j]}`)
-          .classList.add('cell-no')
-        for (let c = 0; c < key.length; c++) {
-          key[c].textContent == userWord[j]
-            ? key[c].classList.add('key-no')
-            : null
+      for (let j = 0; j < 5; j++) {
+        activeCells.push(startCell + j)
+      }
+
+      for (let j = 0; j < 5; j++) {
+        if (
+          secretWord2.includes(userWord[j]) &&
+          secretWord2[j] != userWord[j]
+        ) {
+          document
+            .querySelector(`.cell${activeCells[j]}`)
+            .classList.add('cell-almost')
+          for (let c = 0; c < key.length; c++) {
+            key[c].textContent == userWord[j]
+              ? key[c].classList.add('key-almost')
+              : null
+          }
+        } else if (secretWord2[j] == userWord[j]) {
+          document
+            .querySelector(`.cell${activeCells[j]}`)
+            .classList.add('cell-guessed')
+          for (let c = 0; c < key.length; c++) {
+            key[c].textContent == userWord[j]
+              ? key[c].classList.add('key-guessed')
+              : null
+          }
+        } else {
+          document
+            .querySelector(`.cell${activeCells[j]}`)
+            .classList.add('cell-no')
+          for (let c = 0; c < key.length; c++) {
+            key[c].textContent == userWord[j]
+              ? key[c].classList.add('key-no')
+              : null
+          }
         }
       }
-    }
-    userWord = []
+      userWord = []
+    } else alert('Такого слова нет в базе')
   }
 })
 

@@ -225,8 +225,9 @@ body {
 .terms {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
+  margin: 2rem auto;
   height: 100vh;
+  max-width: 550px;
 }
 
 .terms-close {
@@ -276,6 +277,7 @@ body.night-mode {
 
 .key-no.night-mode {
   background: #d8d9da;
+  color: #000;
 }
 .key-almost.night-mode {
   background: #c1a73e;
