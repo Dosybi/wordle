@@ -196,7 +196,7 @@ keyboard.addEventListener('click', function (e) {
       }
 
       triesCount++
-      if (triesCount === 5) {
+      if (triesCount === 5 && guess != secretWord) {
         heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
         againButton.classList.remove('hidden')
         keyboard.classList.toggle('hidden')
