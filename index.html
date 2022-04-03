@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
     <link rel="stylesheet" href="./main.css" />
-    <script src="./js/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="./wordle.js"></script>
-    <script type="text/javascript" src="./words.js"></script>
-    <script type="text/javascript" src="./type.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,148 +11,130 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <script type="text/javascript" src="./words.js"></script>
+    <script defer type="module" src="./wordle.js"></script>
+    <title>Вордли</title>
   </head>
-  <body onload="makeAWord()">
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-12 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-          <div class="accordion accordion-flush">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed bg-warning bg-gradient" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><b>Правила</b></button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>
-                    Задача — угадать существительное, состоящее из пяти букв.
-                  </p>
-                  <p id="descriptionBox">
-                    <span id="descriptionBox2">
-                      <span style="background-color: #76ce29">Некоторые буквы</span>
-                      есть в загаданном слове и стоят на правильных местах,<br />
-                      <span style="background-color: yellow">некоторые тоже есть</span>
-                      в загаданном слове, но на других местах,<br />
-                      <span style="background-color: #c3c3c3">остальных букв</span>
-                      в слове нет.</span
-                    >
-                  </p>
-                  <p>
-                    Если в попытках отгадать слово «пульт» вы напишете «плато»,
-                    то получите такую подсказку:</br>
-                    <span style="background-color: #76ce29">п</span
-                    >  <span style="background-color: yellow">л</span
-                    >  <span style="background-color: #c3c3c3">а</span
-                    >  <span style="background-color: yellow">т</span
-                    >  <span style="background-color: #c3c3c3">о</span>
-                  </p>
-                  <p>Чем меньше попыток вы используете, чтобы отгадать слово, тем лучше. Попытка сгорит, если ввести абракадабру или слово, в котором больше или меньше пяти букв.</p>
-                  <p>Чтобы начать заново с новым словом, обновите страницу.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-          
-
+  <body>
+    <div class="terms hidden">
+      <div class="terms-close">╳</div>
+      <div class="terms-text">
+        Задача — угадать существительное, состоящее из пяти букв.
+      </div>
+      <div class="terms-text">
+        После каждой попытки цвет букв меняется. Он показывает,
+        <span style="background: #6aaa64; color: #fff">какие буквы</span> есть
+        в загаданном слове и стоят на правильных местах,
+        <span style="background: #c9b458; color: #fff">какие стоят</span> не на
+        том месте, и
+        <span style="background: #787c7e; color: #fff">каких букв</span> в слове
+        нет.
+      </div>
+      <div class="terms-text">
+        Если в попытках отгадать слово «пульт» вы напишете «плато», то получите
+        такую подсказку:
+      </div>
+      <div class="terms-cells">
+        <div class="terms-cell cell-guessed" id="cell">П</div>
+        <div class="terms-cell cell-almost" id="cell">Л</div>
+        <div class="terms-cell cell-no" id="cell">А</div>
+        <div class="terms-cell cell-almost" id="cell">Т</div>
+        <div class="terms-cell cell-no" id="cell">О</div>
+      </div>
+      <div>
+        Чем меньше попыток вы используете, чтобы отгадать слово, тем лучше.
+      </div>
+    </div>
+    <div class="container">
+      <header class="header">
+        <div class="terms-icon"><h1>🔑</h1></div>
+        <h1 class="heading">
+          Во<span class="header-span">р</span><span class="header-span">д</span
+          ><span class="header-span">л</span>и
+        </h1>
+        <div class="night"><h1>🌘</h1></div>
+      </header>
+      <div class="wordle">
+        <div class="cell-row1">
+          <div class="cell1" id="cell"></div>
+          <div class="cell2" id="cell"></div>
+          <div class="cell3" id="cell"></div>
+          <div class="cell4" id="cell"></div>
+          <div class="cell5" id="cell"></div>
+        </div>
+        <div class="cell-row2">
+          <div class="cell6" id="cell"></div>
+          <div class="cell7" id="cell"></div>
+          <div class="cell8" id="cell"></div>
+          <div class="cell9" id="cell"></div>
+          <div class="cell10" id="cell"></div>
+        </div>
+        <div class="cell-row3">
+          <div class="cell11" id="cell"></div>
+          <div class="cell12" id="cell"></div>
+          <div class="cell13" id="cell"></div>
+          <div class="cell14" id="cell"></div>
+          <div class="cell15" id="cell"></div>
+        </div>
+        <div class="cell-row4">
+          <div class="cell16" id="cell"></div>
+          <div class="cell17" id="cell"></div>
+          <div class="cell18" id="cell"></div>
+          <div class="cell19" id="cell"></div>
+          <div class="cell20" id="cell"></div>
+        </div>
+        <div class="cell-row5">
+          <div class="cell21" id="cell"></div>
+          <div class="cell22" id="cell"></div>
+          <div class="cell23" id="cell"></div>
+          <div class="cell24" id="cell"></div>
+          <div class="cell25" id="cell"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-        <div class="hints">
-            <p id="hint"></p>
-          <div class="userInput">
-            <div class="colored">
-              <p class="userWordOnScreen" id="userWordOnScreen0"></p>
-            </div>
-            <div class="colored">
-              <p class="userWordOnScreen" id="userWordOnScreen1"></p>
-            </div>
-            <div class="colored">
-              <p class="userWordOnScreen" id="userWordOnScreen2"></p>
-            </div>
-            <div class="colored">
-              <p class="userWordOnScreen" id="userWordOnScreen3"></p>
-            </div>
-            <div class="colored">
-              <p class="userWordOnScreen" id="userWordOnScreen4"></p>
-            </div>
-          </div>
+      <div class="keyboard">
+        <div class="keyboard-row3">
+          <div class="lit" id="lit1">й</div>
+          <div class="lit" id="lit2">ц</div>
+          <div class="lit" id="lit3">у</div>
+          <div class="lit" id="lit4">к</div>
+          <div class="lit" id="lit5">е</div>
+          <div class="lit" id="lit6">н</div>
+          <div class="lit" id="lit7">г</div>
+          <div class="lit" id="lit8">ш</div>
+          <div class="lit" id="lit9">щ</div>
+          <div class="lit" id="lit10">з</div>
+          <div class="lit" id="lit11">х</div>
+          <div class="lit" id="lit12">ъ</div>
+        </div>
+        <div class="keyboard-row2">
+          <div class="lit" id="lit13">ф</div>
+          <div class="lit" id="lit14">ы</div>
+          <div class="lit" id="lit15">в</div>
+          <div class="lit" id="lit16">а</div>
+          <div class="lit" id="lit17">п</div>
+          <div class="lit" id="lit18">р</div>
+          <div class="lit" id="lit19">о</div>
+          <div class="lit" id="lit20">л</div>
+          <div class="lit" id="lit21">д</div>
+          <div class="lit" id="lit22">ж</div>
+          <div class="lit" id="lit23">э</div>
+          <div class="lit" id="lit33">⌫</div>
+        </div>
+        <div class="keyboard-row1">
+          <div class="lit" id="lit24">я</div>
+          <div class="lit" id="lit25">ч</div>
+          <div class="lit" id="lit26">с</div>
+          <div class="lit" id="lit27">м</div>
+          <div class="lit" id="lit28">и</div>
+          <div class="lit" id="lit29">т</div>
+          <div class="lit" id="lit30">ь</div>
+          <div class="lit" id="lit31">б</div>
+          <div class="lit" id="lit32">ю</div>
+          <div class="lit" id="lit34">↵</div>
         </div>
       </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-          <div class="inputs">
-            <input
-            class="form-control form-control-lg"
-              maxlength="5"
-              placeholder="Введите слово"
-              id="userWordGuess"
-              onkeydown="if (event.keyCode == 13)
-        document.getElementById('lit34').click()"
-            />
-            <!-- <button id="button" onclick="getTheWord()">Проверить</button> -->
-          </div>
-        </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-12 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-          <div class="triesCount">
-            <p id="tries">
-              Остал<span id="triesStart">ось </span
-              ><span id="numberOfTries">5</span> попыт<span id="triesEnd">ок</span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-5">
-        <div class="col-12 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-          <div class="alphabet" id="alphabet">
-            <div class="row3 d-flex flex-row">
-              <div class="lit" id="lit1" onclick="type1 ()"><p>й</p></div>
-              <div class="lit" id="lit2" onclick="type2 ()"><p>ц</p></div>
-              <div class="lit" id="lit3" onclick="type3 ()"><p>у</p></div>
-              <div class="lit" id="lit4" onclick="type4 ()"><p>к</p></div>
-              <div class="lit" id="lit5" onclick="type5 ()"><p>е</p></div>
-              <div class="lit" id="lit6" onclick="type6 ()"><p>н</p></div>
-              <div class="lit" id="lit7" onclick="type7 ()"><p>г</p></div>
-              <div class="lit" id="lit8" onclick="type8 ()"><p>ш</p></div>
-              <div class="lit" id="lit9" onclick="type9 ()"><p>щ</p></div>
-              <div class="lit" id="lit10" onclick="type10 ()"><p>з</p></div>
-              <div class="lit" id="lit11" onclick="type11 ()"><p>х</p></div>
-              <div class="lit" id="lit12" onclick="type12 ()"><p>ъ</p></div>
-            </div>
-            <div class="row2 d-flex flex-row">
-              <div class="lit" id="lit13" onclick="type13 ()"><p>ф</p></div>
-              <div class="lit" id="lit14" onclick="type14 ()"><p>ы</p></div>
-              <div class="lit" id="lit15" onclick="type15 ()"><p>в</p></div>
-              <div class="lit" id="lit16" onclick="type16 ()"><p>а</p></div>
-              <div class="lit" id="lit17" onclick="type17 ()"><p>п</p></div>
-              <div class="lit" id="lit18" onclick="type18 ()"><p>р</p></div>
-              <div class="lit" id="lit19" onclick="type19 ()"><p>о</p></div>
-              <div class="lit" id="lit20" onclick="type20 ()"><p>л</p></div>
-              <div class="lit" id="lit21" onclick="type21 ()"><p>д</p></div>
-              <div class="lit" id="lit22" onclick="type22 ()"><p>ж</p></div>
-              <div class="lit" id="lit23" onclick="type23 ()"><p>э</p></div>
-              <div class="lit" id="lit33" onclick="type33 ()"><p>←</p></div>
-            </div>
-            <div class="row3 d-flex flex-row">
-              <div class="lit" id="lit24" onclick="type24 ()"><p>я</p></div>
-              <div class="lit" id="lit25" onclick="type25 ()"><p>ч</p></div>
-              <div class="lit" id="lit26" onclick="type26 ()"><p>с</p></div>
-              <div class="lit" id="lit27" onclick="type27 ()"><p>м</p></div>
-              <div class="lit" id="lit28" onclick="type28 ()"><p>и</p></div>
-              <div class="lit" id="lit29" onclick="type29 ()"><p>т</p></div>
-              <div class="lit" id="lit30" onclick="type30 ()"><p>ь</p></div>
-              <div class="lit" id="lit31" onclick="type31 ()"><p>б</p></div>
-              <div class="lit" id="lit32" onclick="type32 ()"><p>ю</p></div>
-              <div class="lit" id="lit34" onclick="getTheWord()"><p>ввод</p></div>
-            </div>
-          </div>
-        </div>
+      <div class="again">
+        <button class="again-button hidden">Сыграть ещё</button>
       </div>
     </div>
   </body>

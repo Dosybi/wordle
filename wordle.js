@@ -1,155 +1,285 @@
-var secretWord = ''
-var secretWordArray = []
-var tries = 0
-userWord = ''
-var rows = 0
-var scored = 0
+import { fiveLetterWords } from './words.js'
 
+const container = document.querySelector('.container')
+const keyboard = document.querySelector('.keyboard')
+const key = document.querySelectorAll('.lit')
+const heading = document.querySelector('.heading')
+const span = document.querySelectorAll('.header-span')
+const againButton = document.querySelector('.again-button')
+const night = document.querySelector('.night')
+const termsIcon = document.querySelector('.terms-icon')
+const terms = document.querySelector('.terms')
+const termsClose = document.querySelector('.terms-close')
 
-var fiveLetterWords = require('./words')
-getAllWords() = require('./words')
+const emojisStart = [
+  '👽',
+  '👾',
+  '🤖',
+  '🐒',
+  '🦍',
+  '🐕',
+  '🐩',
+  '🐺',
+  '🐈',
+  '🐅',
+  '🐆',
+  '🐴',
+  '🐎',
+  '🦌',
+  '🦄',
+  '🐂',
+  '🐃',
+  '🐄',
+  '🐪',
+  '🐫',
+  '🐘',
+  '🦏',
+  '🐇',
+  '🐿',
+  '🦇',
+  '🐻',
+  '🐨',
+  '🐼',
+  '🐧',
+  '🕊',
+  '🦅',
+  '🦆',
+  '🦉',
+  '🐸',
+  '🐊',
+  '🐢',
+  '🦎',
+  '🐋',
+  '🐬',
+  '🐟',
+  '🐠',
+  '🐡',
+  '🦈',
+  '🐚',
+  '🦀',
+  '🦐',
+  '🦑',
+  '🦋',
+  '🐌',
+  '🐛',
+  '🐜',
+  '🐝',
+  '🐞',
+  '🕷',
+  '🦂',
+  '🌲',
+  '🌳',
+  '🌴',
+  '🌵',
+  '🌾',
+  '🌿',
+  '🍀',
+]
+const emojisWin = [
+  '👻',
+  '💃',
+  '💃🏻',
+  '💃🏼',
+  '💃🏽',
+  '💃🏾',
+  '💃🏿',
+  '🕺',
+  '🕺🏻',
+  '🕺🏼',
+  '🕺🏽',
+  '🕺🏾',
+  '🕺🏿',
+  '👑',
+  '💎',
+  '🌺',
+  '🌻',
+  '🌼',
+  '🥐',
+  '🍦',
+  '🍩',
+  '🍰',
+  '🍫',
+  '🍭',
+  '🍯',
+  '🍾',
+  '🍷',
+  '🍸',
+  '🍺',
+  '🎷',
+  '🔫',
+]
+const emojisLose = [
+  '💀',
+  '💩',
+  '👀',
+  '🍅',
+  '🍑',
+  '🤦',
+  '🤦‍♂‍',
+  '🤦‍♀‍',
+  '🤷',
+  '🤷‍♂‍',
+  '🤷‍♀‍',
+  '🚶',
+  '🚶‍♂‍',
+  '🚶‍♀‍',
+  '🐣',
+  '🧄',
+  '🧅',
+  '🩹',
+  '🧻',
+]
+let i = 1
+let userWord = []
+let secretWord = ''
+let color = [1, 2, 3]
+let switchCount = 0
+let triesCount = 0
 
-function getRandomWord(arr) {
-  if (arr && arr.length) {
-    return arr[Math.floor(Math.random() * arr.length)]
-  }
+function randomEmoji(arr) {
+  return arr[Math.floor(Math.random() * arr.length)]
+}
+
+for (let c = 0; c < color.length; c++) {
+  span[c].classList.add(`cell-span${color[c]}`)
 }
 
 function makeAWord() {
-  getAllWords()
-  secretWord = getRandomWord(fiveLetterWords)
-  console.log(secretWord)
+  secretWord =
+    fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)]
 }
+makeAWord()
 
-function getTheWord() {
-  secretWordArray = secretWord.split('')
-  console.log(secretWordArray)
-  document.getElementById('hint').textContent = ''
-  userWordPre = document.getElementById('userWordGuess').value
-  userWord = userWordPre.toLowerCase()
-  document.getElementById('descriptionBox').className = 'description2'
+let secretWord2 = [...secretWord]
+console.log(secretWord)
 
-  document.getElementById('userWordGuess').value = ''
-  let userWordArray = userWord.split('')
-
-  function userWordModification() {
-    if (userWordArray.length > 0) {
-      let usLen = userWordArray.length
-      let text = ''
-      for (let i = 0; i < usLen; i++) {
-        text += '<span>' + userWordArray[i] + ' </span>'
-      }
+keyboard.addEventListener('click', function (e) {
+  let cell = document.querySelector(`.cell${i}`)
+  if (
+    e.target.classList.contains('lit') &&
+    e.target.textContent != '⌫' &&
+    e.target.textContent != '↵'
+  ) {
+    if (
+      userWord.length != 5 &&
+      userWord.length != 10 &&
+      userWord.length != 15 &&
+      userWord.length != 20 &&
+      userWord.length != 25
+    ) {
+      cell.textContent = e.target.textContent
+      userWord.push(cell.textContent)
+      i++
     }
   }
-
-  function userWordLengthCheck() {
-    if (tries < 5 && userWordArray.length < 5) {
-      document.getElementById('hint').innerHTML = 'Слишком короткое слово'
-      document.getElementById('userWordOnScreen' + tries).innerHTML = ''
-      stopAll()
-    } else if (tries < 5 && userWordArray.length > 5) {
-      document.getElementById('hint').innerHTML = 'Слишком длинное слово'
-      document.getElementById('userWordOnScreen' + tries).innerHTML = ''
-      stopAll()
-    } else if (tries < 5 && userWordArray.length == 5 && fiveLetterWords.includes(userWord) == false) {
-      document.getElementById('hint').innerHTML = 'Такого слова нет в словаре'
-      document.getElementById('userWordOnScreen' + tries).innerHTML = ''
-      stopAll()
-    } else if (tries >= 5) {
-      colorElements()
-      triesAndResult()
-    }
+  if (e.target.textContent === '⌫') {
+    i === 1 || i--
+    cell = document.querySelector(`.cell${i}`)
+    userWord.pop()
+    cell.textContent = ''
   }
-  
-  function colorElements() {
-    var keyboardArr = []
-    for (var i = 1; i <= 32; i++) {
-      var lit = document.getElementById('lit' + i).textContent
-      keyboardArr.push(lit)
+  if (e.target.textContent === '↵' && userWord.length === 5) {
+    let b = i
+    let startCell = b - 5
+    let activeCells = []
+    let guess = userWord.join('')
+    for (let c = 0; c < color.length; c++) {
+      span[c].classList.remove(`cell-span${color[c]}`)
     }
-    let text = []
-    if (userWordArray.length == 5) {
-      for (let i = 0; i < userWordArray.length; i++) {
-        if (userWordArray[i] == secretWordArray[i]) {
-          text.push(
-            '<span class="letterGuessed">' + userWordArray[i] + '</span>'
-          )
-          indexlit = keyboardArr.indexOf(userWordArray[i])
-          document.getElementById('lit' + (indexlit + 1)).style = 'background-color: #76ce29'
-        } else if (
-          secretWordArray.includes(userWordArray[i]) &&
-          userWordArray[i] !== secretWordArray[i]
-        ) {
-          text.push(
-            '<span class="letterAlmost">' + userWordArray[i] + '</span>'
-          )
-          indexlit = keyboardArr.indexOf(userWordArray[i])
-          document.getElementById('lit' + (indexlit + 1)).style = 'background-color: yellow'
-        } else if (secretWordArray.includes(userWordArray[i]) == false) {
-          text.push('<span class="letterNo">' + userWordArray[i] + '</span>')
-          indexlit = keyboardArr.indexOf(userWordArray[i])
-          document.getElementById('lit' + (indexlit + 1)).style = 'background-color: #c3c3c3'
+
+    if (guess === secretWord) {
+      heading.innerHTML = `Победа! ${randomEmoji(emojisWin)}`
+      againButton.classList.remove('hidden')
+    }
+
+    triesCount++
+    if (triesCount === 5) {
+      heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
+      againButton.classList.remove('hidden')
+    }
+
+    for (let j = 0; j < 5; j++) {
+      activeCells.push(startCell + j)
+    }
+
+    for (let j = 0; j < 5; j++) {
+      if (secretWord2.includes(userWord[j]) && secretWord2[j] != userWord[j]) {
+        document
+          .querySelector(`.cell${activeCells[j]}`)
+          .classList.add('cell-almost')
+        for (let c = 0; c < key.length; c++) {
+          key[c].textContent == userWord[j]
+            ? key[c].classList.add('key-almost')
+            : null
+        }
+      } else if (secretWord2[j] == userWord[j]) {
+        document
+          .querySelector(`.cell${activeCells[j]}`)
+          .classList.add('cell-guessed')
+        for (let c = 0; c < key.length; c++) {
+          key[c].textContent == userWord[j]
+            ? key[c].classList.add('key-guessed')
+            : null
+        }
+      } else {
+        document
+          .querySelector(`.cell${activeCells[j]}`)
+          .classList.add('cell-no')
+        for (let c = 0; c < key.length; c++) {
+          key[c].textContent == userWord[j]
+            ? key[c].classList.add('key-no')
+            : null
         }
       }
-      // document.getElementById('hint').innerHTML = ''
-      document.getElementById('userWordOnScreen' + rows).innerHTML =
-        text.join(' ')
     }
-    rows += 1
+    userWord = []
   }
+})
 
-  function triesAndResult() {
-    var link = 'https://ru.wiktionary.org/wiki/' + secretWord
-    tries += 1
-    var triesCount = 5 - tries
-    document.getElementById('numberOfTries').textContent = triesCount
+night.addEventListener('click', function (e) {
+  let icons = ['<h1>🌕</h1>', '<h1>🌘</h1>']
+  this.innerHTML = icons[switchCount]
+  if (switchCount === 0) {
+    switchCount++
+  } else switchCount--
+  document.body.classList.toggle('night-mode')
+  const cellsNight = document.querySelectorAll('#cell')
+  for (const item of cellsNight) {
+    item.classList.toggle('night-mode')
+  }
+  for (const item of key) {
+    item.classList.toggle('night-mode')
+  }
+  againButton.classList.toggle('night-mode')
+  terms.classList.toggle('night-mode')
+})
 
-    if (triesCount == 4 || triesCount == 3 || triesCount == 2) {
-      document.getElementById('triesEnd').textContent = 'ки'
-    } else if (triesCount == 1) {
-      document.getElementById('triesEnd').textContent = 'ка'
-      document.getElementById('triesStart').textContent = 'ась '
-    }
+termsIcon.addEventListener('click', function (e) {
+  terms.classList.toggle('hidden')
+  container.classList.toggle('hidden')
+})
 
-    if (tries >= 5 && userWord !== secretWord) {
-      // document.getElementById('button').disabled = true
-      document.getElementById('hint').textContent = 'Вы потратили все попытки'
-      document.getElementById('tries').textContent = 'Загаданное слово — ' + '«' + secretWord + '»'
-    } else if (userWord == secretWord) {
-      document.getElementById('hint').textContent = ''
-      // document.getElementById('button').disabled = true
-      document.getElementById('hint').textContent = 'Победа!'
-      document.getElementById('tries').textContent = ' '
+termsClose.addEventListener('click', function (e) {
+  terms.classList.toggle('hidden')
+  container.classList.toggle('hidden')
+})
+
+againButton.addEventListener('click', function (e) {
+  for (const cell of document.querySelectorAll('#cell')) {
+    if (cell.classList.contains('terms-cell') == false) {
+      cell.innerHTML = ''
+      cell.classList.remove('cell-no', 'cell-almost', 'cell-guessed')
     }
   }
-
-  // function score () {
-  //   let ww = ''
-  //   if (userWord == secretWord && tries == 1) {
-  //     scored += 5
-  //     ww = ' очков'
-  //     document.getElementById('tries').textContent = 'Вы набрали ' + scored + ww
-  //   } else if (userWord == secretWord && tries == 2) {
-  //     scored += 4
-  //     ww = ' очка'
-  //     document.getElementById('tries').textContent = 'Вы набрали ' + scored + ww
-  //   } else if (userWord == secretWord && tries == 3) {
-  //     scored += 3
-  //     ww = ' очка'
-  //     document.getElementById('tries').textContent = 'Вы набрали ' + scored + ww
-  //   } else if (userWord == secretWord && tries == 4) {
-  //     scored += 2
-  //     ww = ' очка'
-  //     document.getElementById('tries').textContent = 'Вы набрали ' + scored + ww
-  //   } else if (userWord == secretWord && tries == 5) {
-  //     scored += 1
-  //     ww = ' очко'
-  //     document.getElementById('tries').textContent = 'Вы набрали ' + scored + ww
-  //   }
-  // }
-
-  triesAndResult()
-  userWordModification()
-  userWordLengthCheck()
-  colorElements()
-}
+  for (const item of key) {
+    item.classList.remove('key-no', 'key-almost', 'key-guessed')
+  }
+  i = 1
+  userWord = []
+  triesCount = 0
+  heading.innerHTML = `Во<span class="header-span">р</span><span class="header-span">д</span
+  ><span class="header-span">л</span>и`
+  makeAWord()
+  secretWord2 = [...secretWord]
+  this.classList.toggle('hidden')
+})
