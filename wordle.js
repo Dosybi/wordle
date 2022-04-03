@@ -190,12 +190,14 @@ keyboard.addEventListener('click', function (e) {
     if (guess === secretWord) {
       heading.innerHTML = `Победа! ${randomEmoji(emojisWin)}`
       againButton.classList.remove('hidden')
+      keyboard.classList.toggle('hidden')
     }
 
     triesCount++
     if (triesCount === 5) {
       heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
       againButton.classList.remove('hidden')
+      keyboard.classList.toggle('hidden')
     }
 
     for (let j = 0; j < 5; j++) {
@@ -281,5 +283,6 @@ againButton.addEventListener('click', function (e) {
   ><span class="header-span">л</span>и`
   makeAWord()
   secretWord2 = [...secretWord]
+  keyboard.classList.toggle('hidden')
   this.classList.toggle('hidden')
 })

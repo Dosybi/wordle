@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 1em 0 0 0;
@@ -199,6 +199,23 @@ body {
     border-radius: 10px;
     text-align: center;
     padding: 10px 2px 2px 2px;
+  }
+  .key-almost {
+    background: #e6dcb2;
+    color: #000;
+    transition: 0.5s ease;
+  }
+
+  .key-no {
+    background: #cbcccd;
+    color: #000;
+    transition: 0.5s ease;
+  }
+
+  .key-guessed {
+    background: #c0dbbd;
+    color: #000;
+    transition: 0.5s ease;
   }
 }
 
