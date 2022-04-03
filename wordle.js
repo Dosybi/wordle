@@ -10,6 +10,8 @@ const night = document.querySelector('.night')
 const termsIcon = document.querySelector('.terms-icon')
 const terms = document.querySelector('.terms')
 const termsClose = document.querySelector('.terms-close')
+const answer = document.querySelector('.answer')
+const answerCell = document.querySelectorAll('.answer-cell')
 
 const emojisStart = [
   '👽',
@@ -200,6 +202,11 @@ keyboard.addEventListener('click', function (e) {
         heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
         againButton.classList.remove('hidden')
         keyboard.classList.toggle('hidden')
+        for (let i = 0; i < answerCell.length; i++) {
+          answer.classList.toggle('hidden')
+          answerCell[i].innerHTML = secretWord2[i].toUpperCase()
+          console.log(secretWord2)
+        }
       }
 
       for (let j = 0; j < 5; j++) {
@@ -274,7 +281,10 @@ termsClose.addEventListener('click', function (e) {
 
 againButton.addEventListener('click', function (e) {
   for (const cell of document.querySelectorAll('#cell')) {
-    if (cell.classList.contains('terms-cell') == false) {
+    if (
+      cell.classList.contains('terms-cell') == false &&
+      cell.classList.contains('answer-cell') == false
+    ) {
       cell.innerHTML = ''
       cell.classList.remove('cell-no', 'cell-almost', 'cell-guessed')
     }
@@ -290,5 +300,6 @@ againButton.addEventListener('click', function (e) {
   makeAWord()
   secretWord2 = [...secretWord]
   keyboard.classList.toggle('hidden')
+  answer.classList.toggle('hidden')
   this.classList.toggle('hidden')
 })

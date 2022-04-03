@@ -121,6 +121,10 @@ body {
   text-transform: uppercase;
 }
 
+.answer {
+  text-align: center;
+}
+
 .keyboard {
   cursor: pointer;
   margin: 2em 0 2em 0;
@@ -237,13 +241,15 @@ body {
 .terms-text {
   margin-bottom: 1rem;
 }
-.terms-cells {
+.terms-cells,
+.answer-cells {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 1rem 0 2rem 0;
 }
-.terms-cell {
+.terms-cell,
+.answer-cell {
   width: 62px;
   height: 62px;
   border: 2px solid #d3d6da;
