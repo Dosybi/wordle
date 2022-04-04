@@ -175,12 +175,14 @@ keyboard.addEventListener('click', function (e) {
     }
   }
   if (e.target.textContent === '⌫') {
-    i === 1 || i--
+    userWord.length != 0 ? i-- : null
     cell = document.querySelector(`.cell${i}`)
-    userWord.pop()
-    cell.textContent = ''
+    let deleted = userWord.pop()
+    cell.textContent == deleted ? (cell.textContent = '') : null
+    console.log(i, cell, userWord)
   }
   if (e.target.textContent === '↵' && userWord.length === 5) {
+    console.log(userWord)
     let b = i
     let startCell = b - 5
     let activeCells = []
@@ -300,6 +302,6 @@ againButton.addEventListener('click', function (e) {
   makeAWord()
   secretWord2 = [...secretWord]
   keyboard.classList.toggle('hidden')
-  answer.classList.toggle('hidden')
+  answer.classList.contains('hidden') || answer.classList.toggle('hidden')
   this.classList.toggle('hidden')
 })
