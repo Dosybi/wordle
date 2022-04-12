@@ -194,14 +194,14 @@ keyboard.addEventListener('click', function (e) {
       }
 
       if (guess === secretWord) {
-        heading.innerHTML = `Победа! ${randomEmoji(emojisWin)}`
+        heading.innerHTML = `Jeñis! ${randomEmoji(emojisWin)}`
         againButton.classList.remove('hidden')
         keyboard.classList.toggle('hidden')
       }
 
       triesCount++
       if (triesCount === 5 && guess != secretWord) {
-        heading.innerHTML = `Не угадали ${randomEmoji(emojisLose)}`
+        heading.innerHTML = `Boljamadıñız ${randomEmoji(emojisLose)}`
         againButton.classList.remove('hidden')
         keyboard.classList.toggle('hidden')
         for (let i = 0; i < answerCell.length; i++) {
@@ -297,8 +297,8 @@ againButton.addEventListener('click', function (e) {
   i = 1
   userWord = []
   triesCount = 0
-  heading.innerHTML = `Во<span class="header-span">р</span><span class="header-span">д</span
-  ><span class="header-span">л</span>и`
+  heading.innerHTML = `Wo<span class="header-span">r</span><span class="header-span">d</span
+  ><span class="header-span">l</span>e`
   makeAWord()
   secretWord2 = [...secretWord]
   keyboard.classList.toggle('hidden')
