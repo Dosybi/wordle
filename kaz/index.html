@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <link rel="stylesheet" href="./main.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script type="text/javascript" src="./words.js"></script>
+    <script defer type="module" src="./wordle.js"></script>
+    <title>Wordlı</title>
+  </head>
+  <body>
+    <div class="terms hidden">
+      <div class="terms-close">╳</div>
+      <div class="terms-text">
+        Задача — угадать существительное, состоящее из пяти букв.
+      </div>
+      <div class="terms-text">
+        После каждой попытки цвет букв меняется. Он показывает,
+        <span style="background: #6aaa64; color: #fff">какие буквы</span> есть
+        в загаданном слове и стоят на правильных местах,
+        <span style="background: #c9b458; color: #fff">какие стоят</span> не на
+        том месте, и
+        <span style="background: #787c7e; color: #fff">каких букв</span> в слове
+        нет.
+      </div>
+      <div class="terms-text">
+        Если в попытках отгадать слово «пульт» вы напишете «плато», то получите
+        такую подсказку:
+      </div>
+      <div class="terms-cells">
+        <div class="terms-cell cell-guessed" id="cell">П</div>
+        <div class="terms-cell cell-almost" id="cell">Л</div>
+        <div class="terms-cell cell-no" id="cell">А</div>
+        <div class="terms-cell cell-almost" id="cell">Т</div>
+        <div class="terms-cell cell-no" id="cell">О</div>
+      </div>
+      <div>
+        Чем меньше попыток вы используете, чтобы отгадать слово, тем лучше.
+      </div>
+    </div>
+    <div class="container">
+      <header class="header">
+        <div class="terms-icon"><h1>🔑</h1></div>
+        <h1 class="heading">
+          Wo<span class="header-span">r</span><span class="header-span">d</span
+          ><span class="header-span">l</span>ı
+        </h1>
+        <div class="night"><h1>🌘</h1></div>
+      </header>
+      <div class="wordle">
+        <div class="cell-row1">
+          <div class="cell1" id="cell"></div>
+          <div class="cell2" id="cell"></div>
+          <div class="cell3" id="cell"></div>
+          <div class="cell4" id="cell"></div>
+          <div class="cell5" id="cell"></div>
+        </div>
+        <div class="cell-row2">
+          <div class="cell6" id="cell"></div>
+          <div class="cell7" id="cell"></div>
+          <div class="cell8" id="cell"></div>
+          <div class="cell9" id="cell"></div>
+          <div class="cell10" id="cell"></div>
+        </div>
+        <div class="cell-row3">
+          <div class="cell11" id="cell"></div>
+          <div class="cell12" id="cell"></div>
+          <div class="cell13" id="cell"></div>
+          <div class="cell14" id="cell"></div>
+          <div class="cell15" id="cell"></div>
+        </div>
+        <div class="cell-row4">
+          <div class="cell16" id="cell"></div>
+          <div class="cell17" id="cell"></div>
+          <div class="cell18" id="cell"></div>
+          <div class="cell19" id="cell"></div>
+          <div class="cell20" id="cell"></div>
+        </div>
+        <div class="cell-row5">
+          <div class="cell21" id="cell"></div>
+          <div class="cell22" id="cell"></div>
+          <div class="cell23" id="cell"></div>
+          <div class="cell24" id="cell"></div>
+          <div class="cell25" id="cell"></div>
+        </div>
+      </div>
+      <div class="answer hidden">
+        <div class="answer-text">А надо было так:</div>
+        <div class="answer-cells">
+          <div class="answer-cell cell-guessed" id="cell"></div>
+          <div class="answer-cell cell-guessed" id="cell"></div>
+          <div class="answer-cell cell-guessed" id="cell"></div>
+          <div class="answer-cell cell-guessed" id="cell"></div>
+          <div class="answer-cell cell-guessed" id="cell"></div>
+        </div>
+      </div>
+      <div class="keyboard">
+        <div class="keyboard-row3">
+          <div class="lit" id="lit1">q</div>
+          <div class="lit" id="lit2">w</div>
+          <div class="lit" id="lit3">e</div>
+          <div class="lit" id="lit4">r</div>
+          <div class="lit" id="lit5">t</div>
+          <div class="lit" id="lit6">y</div>
+          <div class="lit" id="lit7">u</div>
+          <div class="lit" id="lit8">i</div>
+          <div class="lit" id="lit9">o</div>
+          <div class="lit" id="lit10">p</div>
+          <div class="lit" id="lit11">ä</div>
+          <div class="lit" id="lit12">ñ</div>
+        </div>
+        <div class="keyboard-row2">
+          <div class="lit" id="lit13">a</div>
+          <div class="lit" id="lit14">s</div>
+          <div class="lit" id="lit15">d</div>
+          <div class="lit" id="lit16">f</div>
+          <div class="lit" id="lit17">g</div>
+          <div class="lit" id="lit18">h</div>
+          <div class="lit" id="lit19">j</div>
+          <div class="lit" id="lit20">k</div>
+          <div class="lit" id="lit21">l</div>
+          <div class="lit" id="lit22">ğ</div>
+          <div class="lit" id="lit23">ü</div>
+          <div class="lit" id="lit33">⌫</div>
+        </div>
+        <div class="keyboard-row1">
+          <div class="lit" id="lit24">z</div>
+          <div class="lit" id="lit25">x</div>
+          <div class="lit" id="lit26">ş</div>
+          <div class="lit" id="lit27">v</div>
+          <div class="lit" id="lit28">b</div>
+          <div class="lit" id="lit29">n</div>
+          <div class="lit" id="lit30">m</div>
+          <div class="lit" id="lit31">ū</div>
+          <div class="lit" id="lit32">ö</div>
+          <div class="lit" id="lit33">ı</div>
+          <div class="lit" id="lit34">↵</div>
+        </div>
+      </div>
+      <div class="again">
+        <button class="again-button hidden">Köbirek oynañız</button>
+      </div>
+    </div>
+  </body>
+</html>
